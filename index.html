@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MOHAMMED LAQSOUMI</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary-bg: linear-gradient(
+          145deg,
+          #0f0f23 0%,
+          #1a1a2e 50%,
+          #16213e 100%
+        );
+        --text-color: #f8f9fa;
+        --text-muted: #a0a0b0;
+        --button-bg: rgba(255, 255, 255, 0.05);
+        --button-border: rgba(255, 255, 255, 0.1);
+        --accent-primary: #6366f1;
+        --accent-secondary: #8b5cf6;
+        --accent-tertiary: #a855f7;
+        --accent-warm: #f59e0b;
+        --glow-color: rgba(99, 102, 241, 0.4);
+        --card-bg: rgba(255, 255, 255, 0.03);
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background: var(--primary-bg);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 60px 20px;
+        margin: 0;
+        overflow-x: hidden;
+        position: relative;
+      }
+      .particles {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        overflow: hidden;
+        z-index: 0;
+      }
+
+      .particle {
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        background: radial-gradient(
+          circle,
+          rgba(99, 102, 241, 0.6) 0%,
+          rgba(139, 92, 246, 0.3) 100%
+        );
+        border-radius: 50%;
+        animation: float 15s infinite ease-in-out;
+        filter: blur(1px);
+      }
+
+      .particle:nth-child(1) {
+        left: 10%;
+        animation-delay: 0s;
+        animation-duration: 12s;
+      }
+      .particle:nth-child(2) {
+        left: 20%;
+        animation-delay: 2s;
+        animation-duration: 14s;
+      }
+      .particle:nth-child(3) {
+        left: 30%;
+        animation-delay: 4s;
+        animation-duration: 16s;
+      }
+      .particle:nth-child(4) {
+        left: 40%;
+        animation-delay: 1s;
+        animation-duration: 13s;
+      }
+      .particle:nth-child(5) {
+        left: 50%;
+        animation-delay: 3s;
+        animation-duration: 15s;
+      }
+      .particle:nth-child(6) {
+        left: 60%;
+        animation-delay: 5s;
+        animation-duration: 17s;
+      }
+      .particle:nth-child(7) {
+        left: 70%;
+        animation-delay: 2s;
+        animation-duration: 14s;
+      }
+      .particle:nth-child(8) {
+        left: 80%;
+        animation-delay: 4s;
+        animation-duration: 12s;
+      }
+      .particle:nth-child(9) {
+        left: 90%;
+        animation-delay: 1s;
+        animation-duration: 16s;
+      }
+      .particle:nth-child(10) {
+        left: 15%;
+        animation-delay: 3s;
+        animation-duration: 18s;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(100vh) scale(0);
+          opacity: 0;
+        }
+        10% {
+          opacity: 1;
+        }
+        90% {
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-100vh) scale(1);
+          opacity: 0;
+        }
+      }
+
+      .cursor {
+        width: 24px;
+        height: 24px;
+        border: 2px solid var(--accent-primary);
+        border-radius: 50%;
+        position: fixed;
+        pointer-events: none;
+        z-index: 9999;
+        transition: transform 0.15s ease-out, opacity 0.15s ease-out,
+          border-color 0.3s ease;
+      }
+
+      .cursor-dot {
+        width: 6px;
+        height: 6px;
+        background: var(--accent-secondary);
+        border-radius: 50%;
+        position: fixed;
+        pointer-events: none;
+        z-index: 9999;
+        transition: transform 0.08s ease-out;
+        box-shadow: 0 0 10px var(--accent-secondary);
+      }
+
+      .cursor.active {
+        transform: scale(2);
+        opacity: 0.5;
+      }
+
+      .container {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .profile-img {
+        width: 130px;
+        height: 130px;
+        border-radius: 50%;
+        margin-bottom: 24px;
+        border: 3px solid transparent;
+        background: linear-gradient(#1a1a2e, #1a1a2e) padding-box,
+          linear-gradient(
+              135deg,
+              var(--accent-primary),
+              var(--accent-tertiary),
+              var(--accent-warm)
+            )
+            border-box;
+        box-shadow: 0 10px 40px rgba(99, 102, 241, 0.2),
+          0 0 60px rgba(139, 92, 246, 0.1);
+        animation: profilePop 0.8s ease-out, pulse 3s ease-in-out infinite;
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+          box-shadow 0.4s ease;
+      }
+
+      .profile-img:hover {
+        transform: scale(1.08) rotate(3deg);
+        box-shadow: 0 20px 60px rgba(99, 102, 241, 0.35),
+          0 0 80px rgba(139, 92, 246, 0.2);
+      }
+
+      @keyframes profilePop {
+        0% {
+          transform: scale(0) rotate(-180deg);
+          opacity: 0;
+        }
+        60% {
+          transform: scale(1.2) rotate(10deg);
+        }
+        100% {
+          transform: scale(1) rotate(0);
+          opacity: 1;
+        }
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          box-shadow: 0 10px 40px rgba(99, 102, 241, 0.2),
+            0 0 60px rgba(139, 92, 246, 0.1), 0 0 0 0 rgba(99, 102, 241, 0.3);
+        }
+        50% {
+          box-shadow: 0 10px 40px rgba(99, 102, 241, 0.2),
+            0 0 60px rgba(139, 92, 246, 0.1), 0 0 0 20px rgba(99, 102, 241, 0);
+        }
+      }
+
+      h1 {
+        font-size: 1.9rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+        background: linear-gradient(
+          135deg,
+          #fff 0%,
+          #e0e0e0 50%,
+          var(--accent-primary) 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: slideUp 0.6s ease-out 0.2s both;
+        letter-spacing: 0.5px;
+      }
+
+      h1 i {
+        background: linear-gradient(
+          135deg,
+          var(--accent-primary),
+          var(--accent-tertiary)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .subtitle {
+        font-size: 0.95rem;
+        color: var(--text-muted);
+        margin-bottom: 32px;
+        animation: slideUp 0.6s ease-out 0.4s both;
+        font-weight: 400;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .subtitle i {
+        color: var(--accent-warm);
+        font-size: 0.85rem;
+      }
+
+      @keyframes slideUp {
+        0% {
+          transform: translateY(30px);
+          opacity: 0;
+        }
+        100% {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      .social-icons {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 35px;
+        animation: slideUp 0.6s ease-out 0.5s both;
+      }
+
+      .social-icon {
+        width: 48px;
+        height: 48px;
+        background: var(--card-bg);
+        border: 1px solid var(--button-border);
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-muted);
+        font-size: 1.2rem;
+        text-decoration: none;
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        backdrop-filter: blur(10px);
+      }
+
+      .social-icon:hover {
+        transform: translateY(-4px) scale(1.1);
+        background: linear-gradient(
+          135deg,
+          var(--accent-primary),
+          var(--accent-secondary)
+        );
+        border-color: transparent;
+        color: #fff;
+        box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3),
+          0 0 20px rgba(139, 92, 246, 0.2);
+      }
+
+      .social-icon:active {
+        transform: scale(0.95);
+      }
+
+      .links-container {
+        width: 100%;
+        max-width: 400px;
+      }
+
+      .link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        background: var(--card-bg);
+        color: var(--text-color);
+        text-decoration: none;
+        margin-bottom: 14px;
+        padding: 18px 28px;
+        text-align: center;
+        border-radius: 14px;
+        border: 1px solid var(--button-border);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        font-weight: 500;
+        font-size: 0.95rem;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        position: relative;
+        overflow: hidden;
+        animation: popIn 0.6s ease-out both;
+        backdrop-filter: blur(10px);
+      }
+
+      .link:nth-child(1) {
+        animation-delay: 0.6s;
+      }
+      .link:nth-child(2) {
+        animation-delay: 0.7s;
+      }
+      .link:nth-child(3) {
+        animation-delay: 0.8s;
+      }
+      .link:nth-child(4) {
+        animation-delay: 0.9s;
+      }
+
+      @keyframes popIn {
+        0% {
+          transform: scale(0.5) translateY(50px);
+          opacity: 0;
+        }
+        60% {
+          transform: scale(1.05) translateY(-5px);
+        }
+        100% {
+          transform: scale(1) translateY(0);
+          opacity: 1;
+        }
+      }
+
+      .link::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.4),
+          transparent
+        );
+        transition: left 0.5s ease;
+      }
+
+      .link:hover::before {
+        left: 100%;
+      }
+
+      .link:hover {
+        transform: translateY(-4px) scale(1.01);
+        box-shadow: 0 15px 40px rgba(99, 102, 241, 0.25),
+          0 0 30px rgba(139, 92, 246, 0.15);
+        background: linear-gradient(
+          135deg,
+          var(--accent-primary) 0%,
+          var(--accent-secondary) 100%
+        );
+        border-color: transparent;
+        color: #fff;
+      }
+
+      .link i {
+        color: var(--accent-primary);
+        transition: all 0.3s ease;
+      }
+
+      .link:hover i {
+        color: #fff;
+      }
+
+      .link:active {
+        transform: scale(0.98);
+      }
+
+      .ripple {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.5);
+        transform: scale(0);
+        animation: rippleEffect 0.6s linear;
+        pointer-events: none;
+      }
+
+      @keyframes rippleEffect {
+        to {
+          transform: scale(4);
+          opacity: 0;
+        }
+      }
+
+      .footer {
+        margin-top: 50px;
+        color: var(--text-muted);
+        font-size: 0.85rem;
+        animation: fadeIn 1s ease-out 1.2s both;
+        opacity: 0.7;
+      }
+
+      .footer i {
+        background: linear-gradient(135deg, #f43f5e, #ec4899);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: heartbeat 1.5s ease-in-out infinite;
+      }
+
+      @keyframes heartbeat {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.2);
+        }
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      .tilt {
+        transform-style: preserve-3d;
+        perspective: 1000px;
+      }
+
+      @media (max-width: 480px) {
+        .cursor,
+        .cursor-dot {
+          display: none;
+        }
+
+        h1 {
+          font-size: 1.5rem;
+        }
+
+        .profile-img {
+          width: 100px;
+          height: 100px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="cursor"></div>
+    <div class="cursor-dot"></div>
+
+    <div class="particles">
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+    </div>
+
+    <div class="container">
+      <img
+        src="https://intranet.youcode.ma/storage/users/profile/1379-1728555040.jpg"
+        alt="Photo de profil"
+        class="profile-img tilt"
+      />
+      <h1><i class="fa-solid fa-code"></i> MOHAMMED LAQSOUMI</h1>
+      <p class="subtitle">
+        <i class="fa-solid fa-rocket"></i> Developer & Creator
+      </p>
+
+      <div class="social-icons">
+        <a
+          href="https://github.com/medlaq777"
+          class="social-icon"
+          title="GitHub"
+        >
+          <i class="fa-brands fa-github"></i>
+        </a>
+        <a href="https://linkedin.com" class="social-icon" title="LinkedIn">
+          <i class="fa-brands fa-linkedin-in"></i>
+        </a>
+      </div>
+
+      <div class="links-container">
+        <a
+          href="https://docs.google.com/document/d/1gjt5vPobnYDIFHrh5v6iiY8JY3tMmLvXfay31lb5hk0/edit?usp=sharing"
+          class="link"
+        >
+          <i class="fa-solid fa-file-lines"></i>
+          <span>Cahier de charge</span>
+        </a>
+        <a href="https://figma.com" class="link">
+          <i class="fa-brands fa-figma"></i>
+          <span>Figma</span>
+        </a>
+        <a href="https://github.com/medlaq777" class="link">
+          <i class="fa-brands fa-github"></i>
+          <span>Github</span>
+        </a>
+        <a href="https://canva.com" class="link">
+          <i class="fa-brands fa-canva"></i>
+          <span>Présentation</span>
+        </a>
+      </div>
+
+      <p class="footer">
+        Made with <i class="fa-solid fa-heart"></i> by @MEDLAQ777
+      </p>
+    </div>
+
+    <script>
+      // Custom Cursor
+      const cursor = document.querySelector(".cursor");
+      const cursorDot = document.querySelector(".cursor-dot");
+
+      document.addEventListener("mousemove", (e) => {
+        cursor.style.left = e.clientX - 10 + "px";
+        cursor.style.top = e.clientY - 10 + "px";
+        cursorDot.style.left = e.clientX - 4 + "px";
+        cursorDot.style.top = e.clientY - 4 + "px";
+      });
+
+      // Cursor Effects on Links
+      const links = document.querySelectorAll("a");
+      links.forEach((link) => {
+        link.addEventListener("mouseenter", () =>
+          cursor.classList.add("active")
+        );
+        link.addEventListener("mouseleave", () =>
+          cursor.classList.remove("active")
+        );
+      });
+
+      // Ripple Effect
+      document.querySelectorAll(".link").forEach((button) => {
+        button.addEventListener("click", function (e) {
+          const ripple = document.createElement("span");
+          ripple.classList.add("ripple");
+          const rect = this.getBoundingClientRect();
+          const size = Math.max(rect.width, rect.height);
+          ripple.style.width = ripple.style.height = size + "px";
+          ripple.style.left = e.clientX - rect.left - size / 2 + "px";
+          ripple.style.top = e.clientY - rect.top - size / 2 + "px";
+          this.appendChild(ripple);
+          setTimeout(() => ripple.remove(), 600);
+        });
+      });
+
+      // 3D Tilt Effect
+      const tiltElements = document.querySelectorAll(".tilt");
+      tiltElements.forEach((el) => {
+        el.addEventListener("mousemove", (e) => {
+          const rect = el.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+          const rotateX = (y - centerY) / 10;
+          const rotateY = (centerX - x) / 10;
+          el.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.1)`;
+        });
+        el.addEventListener("mouseleave", () => {
+          el.style.transform =
+            "perspective(1000px) rotateX(0) rotateY(0) scale(1)";
+        });
+      });
+
+      // Parallax on Mouse Move
+      document.addEventListener("mousemove", (e) => {
+        const particles = document.querySelectorAll(".particle");
+        const x = e.clientX / window.innerWidth;
+        const y = e.clientY / window.innerHeight;
+        particles.forEach((particle, index) => {
+          const speed = (index + 1) * 2;
+          particle.style.transform = `translate(${x * speed}px, ${
+            y * speed
+          }px)`;
+        });
+      });
+    </script>
+  </body>
+</html>
